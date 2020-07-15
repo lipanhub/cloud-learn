@@ -39,6 +39,9 @@ local.properties
 # CDT- autotools
 .autotools
 
+# jrebel
+rebel.xml
+
 # Java annotation processor (APT)
 .factorypath
 

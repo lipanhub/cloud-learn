@@ -5,14 +5,9 @@ import fun.lipan.entities.Payment;
 import fun.lipan.service.PaymentService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.cloud.client.ServiceInstance;
-import org.springframework.cloud.client.discovery.DiscoveryClient;
-import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import java.util.List;
-import java.util.function.LongFunction;
 
 /**
  * description
@@ -25,9 +20,6 @@ public class PaymentController {
 
     @Resource
     private PaymentService paymentService;
-
-    @Resource
-    private DiscoveryClient discoveryClient;
 
     @Value("${server.port}")
     private String serverPort;
@@ -50,18 +42,5 @@ public class PaymentController {
         } else {
             return new CommonResult(444, "没有id为" + id + "的记录");
         }
-    }
-
-    @GetMapping(value = "/payment/discovery")
-    public Object discovery(){
-        List<String> services = discoveryClient.getServices();
-        for (String service : services) {
-            log.info("***service***  " + service);
-        }
-        List<ServiceInstance> serviceInstances = discoveryClient.getInstances("CLOUD-PAYMENT-SERVICE");
-        for (ServiceInstance serviceInstance : serviceInstances) {
-            log.info(serviceInstance.getServiceId() + "\t" + serviceInstance.getHost() + "\t" + serviceInstance.getUri());
-        }
-        return this.discoveryClient;
     }
 }
