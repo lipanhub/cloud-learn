@@ -2,18 +2,22 @@ package fun.myrule;
 
 import com.netflix.loadbalancer.IRule;
 import com.netflix.loadbalancer.RandomRule;
+import com.netflix.loadbalancer.RoundRobinRule;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * description
+ * 自定义负载均衡路由规则类
  *
- * @author 28248 2020/07/15 21:11
- */
+ * @author zzyy
+ * @date 2020/3/6 15:15
+ **/
 @Configuration
-public class MyLoadBalancedRule {
+public class MySelfRule {
+
     @Bean
-    public IRule myLoadBalancedRule(){
+    public IRule myRule() {
+        // 定义为随机
         return new RandomRule();
     }
 }
